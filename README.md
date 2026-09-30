@@ -1,4 +1,4 @@
-# AutenticSense · O Sentido Autêntico
+# Sentido Autêntico · by rogerelizar
 
 Portal educacional **offline-first (PWA)** para o estudo das línguas bíblicas originais — **Hebraico**, **Aramaico** e **Grego Koiné** — com ferramentas interativas e exegese integrada. Todo o conteúdo em **português do Brasil (pt-BR)**.
 
@@ -8,7 +8,7 @@ Portal educacional **offline-first (PWA)** para o estudo das línguas bíblicas 
 - **100% offline**: Service Worker dedicado com pré-cache completo (56 arquivos), estratégia *stale-while-revalidate* e fallback de navegação.
 - **Acessibilidade WCAG 2.2**: FAB com central de acessibilidade — leitura em voz alta (TTS pt-BR), fonte para dislexia, alto contraste, tema escuro, escala tipográfica, redução de movimento —, focus trap em menus, anúncios `aria-live`, skip-link e navegação completa por teclado.
 - **Escritas originais nativas**: Unicode com `dir="rtl"` e `lang="he"/"arc"` (Noto Serif Hebrew auto-hospedada) e `lang="grc"` (Noto Serif, incluindo subconjunto grego politônico).
-- **Ferramentas que rodam no dispositivo**: analisador interlinear (Gn 1.1, Dn 5.25, Jo 1.1), transliteradores de hebraico e grego e calculadora de guematria. Nada é enviado a servidores.
+- **Ferramentas que rodam no dispositivo**: analisador interlinear (Gn 1.1, Dn 5.25, Jo 1.1), e transliteradores de hebraico e grego. Nada é enviado a servidores.
 - **SEO/GEO**: meta completos, Open Graph, `manifest.webmanifest`, JSON-LD (`WebApplication`), `robots.txt` e `sitemap.xml`.
 
 ## Estrutura
@@ -30,7 +30,7 @@ autenticsense/
 │   ├── router.js           # SPA por hash (offline-friendly)
 │   ├── a11y.js             # central de acessibilidade + live regions + focus trap
 │   ├── tts.js              # síntese de voz pt-BR (Web Speech API)
-│   ├── tools.js            # transliteração hebraica/grega + guematria
+│   ├── tools.js            # transliteração hebraica/grega
 │   ├── icons.js            # ícones SVG inline
 │   ├── components/interlinear.js
 │   ├── data/               # alfabetos, niqud, interlineares anotados

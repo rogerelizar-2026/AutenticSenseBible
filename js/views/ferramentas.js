@@ -2,21 +2,19 @@
 
 import { verses, verseById } from '../data/interlinear.js';
 import { renderInterlinear, mountInterlinear } from '../components/interlinear.js';
-import { transliterateHebrew, transliterateGreek, gematria, copyText } from '../tools.js';
+import { transliterateHebrew, transliterateGreek, copyText } from '../tools.js';
 import { icon } from '../icons.js';
 import { announce } from '../a11y.js';
-import { tts } from '../tts.js';
 
 const TABS = [
   { id: 'il', label: 'Interlinear' },
   { id: 'he', label: 'Transliterador hebraico' },
   { id: 'gr', label: 'Transliterador grego' },
-  { id: 'gm', label: 'Guematria' }
 ];
 
 export default {
   title: 'Ferramentas',
-  desc: 'Ferramentas bíblicas offline: analisador interlinear, transliteradores de hebraico e grego e calculadora de guematria.',
+  desc: 'Ferramentas bíblicas offline: analisador interlinear e transliteradores de hebraico e grego.',
 
   render() {
     const tabButtons = TABS.map((t, i) => `
@@ -74,7 +72,6 @@ export default {
               <div class="output" id="heOut" aria-live="polite" aria-labelledby="heOutLegend"></div>
               <div class="a11y-row" style="margin-top:0.6rem">
                 <button type="button" class="btn btn-outline btn-sm" id="heCopy">${icon('copy')} Copiar</button>
-                <button type="button" class="btn btn-outline btn-sm" id="heSpeak">${icon('speaker')} Ouvir guia</button>
               </div>
             </div>
           </div>
@@ -98,7 +95,7 @@ export default {
               </p>
             </div>
             <div>
-              <p class="output-legend" id="grOutLegend">Transliteração (SBL simplificado)</p>
+              <p class="output-legend" id="grOutLegend">Transliteração (SBL (Society of Biblical Literature) simplificado)</p>
               <div class="output" id="grOut" aria-live="polite" aria-labelledby="grOutLegend"></div>
               <div class="a11y-row" style="margin-top:0.6rem">
                 <button type="button" class="btn btn-outline btn-sm" id="grCopy">${icon('copy')} Copiar</button>
@@ -108,37 +105,12 @@ export default {
         </div>
       </section>
 
-      <!-- Guematria -->
-      <section role="tabpanel" id="panel-gm" aria-labelledby="tab-gm" class="tabpanel" hidden>
-        <div class="tool-panel">
-          <p class="muted"><strong>Guematria clássica</strong> (<span class="translit">mispar hechréchi</span>):
-          cada consoante hebraica vale um número — א=1 … ת=400. Some os valores de qualquer palavra.</p>
-          <div class="tool-grid">
-            <div class="field">
-              <label for="gmIn">Palavra em hebraico</label>
-              <input type="text" id="gmIn" lang="he" dir="rtl" spellcheck="false"
-                     style="direction:rtl;font-family:var(--osa-font-hebrew);font-size:1.5rem" value="חֶסֶד">
-              <p class="hint">Experimente:
-                <button type="button" class="btn btn-ghost btn-sm" data-gm-sample="חֶסֶד">חֶסֶד · misericórdia</button>
-                <button type="button" class="btn btn-ghost btn-sm" data-gm-sample="שָׁלוֹם">שָׁלוֹם · paz</button>
-                <button type="button" class="btn btn-ghost btn-sm" data-gm-sample="תּוֹרָה">תּוֹרָה · lei</button>
-                <button type="button" class="btn btn-ghost btn-sm" data-gm-sample="יְהוָה">יְהוָה · o Nome</button>
-              </p>
-            </div>
-            <div>
-              <p class="output-legend" id="gmOutLegend">Valor numérico</p>
-              <div class="output" id="gmOut" aria-live="polite" aria-labelledby="gmOutLegend"></div>
-              <p class="hint" id="gmNote"></p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <div class="callout callout--gold" style="margin-top:2rem">
         <span class="callout-title">Limite honesto das ferramentas</span>
         A transliteração é um mapa fonético pedagógico, não uma análise morfológica completa:
         o sheva vocal/silencioso, o qamats-o e os contextos de begadkefat exigem avaliação da
-        palavra inteira — para isso, consulte um léxico (BDB/Strong para o AT; BDAG/Strong para o NT).
+        palavra inteira — para isso, consulte um léxico (BDB (léxico Brown-Driver-Briggs)/Strong para o AT (Antigo Testamento); BDAG (léxico Bauer-Danker-Arndt-Gingrich)/Strong para o NT (Novo Testamento)).
       </div>
     </div>`;
   },
@@ -194,9 +166,6 @@ export default {
       const ok = await copyText(heOut.textContent);
       announce(ok ? 'Transliteração hebraica copiada.' : 'Não foi possível copiar.');
     });
-    root.querySelector('#heSpeak').addEventListener('click', () => {
-      tts.speak(`Transliteração: ${heOut.textContent || 'vazio'}`);
-    });
     updateHe();
 
     const grIn = root.querySelector('#grIn');
@@ -211,30 +180,5 @@ export default {
     });
     updateGr();
 
-    /* ---------- Guematria ---------- */
-    const gmIn = root.querySelector('#gmIn');
-    const gmOut = root.querySelector('#gmOut');
-    const gmNote = root.querySelector('#gmNote');
-    function updateGm() {
-      const { total, parts, ignored } = gematria(gmIn.value);
-      if (!parts.length) {
-        gmOut.innerHTML = '';
-        gmNote.textContent = 'Digite letras do alfabeto hebraico (א – ת).';
-        return;
-      }
-      const sum = parts.map((p) => p.val).join(' + ');
-      gmOut.innerHTML = `
-        <div class="gmt-total">${total}</div>
-        <div class="gmt-parts">${parts.map((p) =>
-          `<span class="gmt-part"><b lang="he">${p.ch}</b><span>${p.val}</span></span>`).join('')}</div>
-        <p class="small muted" style="margin:0.7rem 0 0" dir="ltr">${sum} = <strong>${total}</strong></p>`;
-      gmNote.textContent = ignored
-        ? `${ignored} caractere(s) não hebraico(s) foram ignorados.`
-        : '';
-    }
-    gmIn.addEventListener('input', updateGm);
-    root.querySelectorAll('[data-gm-sample]').forEach((b) =>
-      b.addEventListener('click', () => { gmIn.value = b.dataset.gmSample; updateGm(); }));
-    updateGm();
   }
 };

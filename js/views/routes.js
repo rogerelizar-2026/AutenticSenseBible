@@ -32,7 +32,7 @@ export const navItems = [
   { path: '/hebraico', label: 'Hebraico', desc: 'Aleph-Bet, niqud e Gênesis 1.1', icon: 'scroll' },
   { path: '/aramaico', label: 'Aramaico', desc: 'Daniel, Esdras e a voz de Jesus', icon: 'text' },
   { path: '/grego', label: 'Grego Koiné', desc: 'Alfabeto, casos e João 1.1', icon: 'alpha' },
-  { path: '/ferramentas', label: 'Ferramentas', desc: 'Interlinear, transliteração e guematria', icon: 'tools' },
+  { path: '/ferramentas', label: 'Ferramentas', desc: 'Interlinear e transliteração', icon: 'tools' },
   { path: '/biblioteca', label: 'Livros', desc: 'Ross, Rega, Mounce, Wallace e mais', icon: 'book' },
   { path: '/exegese', label: 'Exegese', desc: 'Método integrado em 7 passos', icon: 'sparkle', top: false },
   { path: '/sobre', label: 'Sobre', desc: 'Propósitos, tecnologia e instituições', icon: 'info', top: false }

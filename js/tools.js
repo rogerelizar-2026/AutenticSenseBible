@@ -1,6 +1,6 @@
 /* ==========================================================================
    AutenticSense — Motor das ferramentas linguísticas
-   Transliteração hebraica/aramaica e grega + guematria.
+   Transliteração hebraica/aramaica e grega.
    100% local: nenhuma informação sai do dispositivo.
    ========================================================================== */
 
@@ -181,29 +181,6 @@ function grWord(word) {
     out += t;
   }
   return out;
-}
-
-/* ---------------------------- GUEMATRIA ---------------------------------- */
-
-const GEMATRIA_VALUES = {
-  'א': 1, 'ב': 2, 'ג': 3, 'ד': 4, 'ה': 5, 'ו': 6, 'ז': 7, 'ח': 8, 'ט': 9,
-  'י': 10, 'כ': 20, 'ך': 20, 'ל': 30, 'מ': 40, 'ם': 40, 'נ': 50, 'ן': 50,
-  'ס': 60, 'ע': 70, 'פ': 80, 'ף': 80, 'צ': 90, 'ץ': 90, 'ק': 100,
-  'ר': 200, 'ש': 300, 'ת': 400
-};
-
-/** Guematria clássica (mispar hechrechi): soma dos valores das consoantes. */
-export function gematria(text) {
-  const parts = [];
-  let ignored = 0;
-  for (const ch of Array.from(String(text || ''))) {
-    if (GEMATRIA_VALUES[ch] !== undefined) {
-      parts.push({ ch, val: GEMATRIA_VALUES[ch] });
-    } else if (!/[\u0591-\u05C7\s]/.test(ch)) {
-      ignored += 1; /* caracteres não hebraicos */
-    }
-  }
-  return { total: parts.reduce((s, p) => s + p.val, 0), parts, ignored };
 }
 
 /* --------------------------- Utilidades ---------------------------------- */
