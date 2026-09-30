@@ -62,7 +62,7 @@
     "isAccessibleForFree": true,
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
     "description": "Portal educacional offline-first para o estudo das línguas bíblicas originais (Hebraico, Aramaico e Grego Koiné), com ferramentas interlineares e método exegético integrado, com acessibilidade WCAG 2.2.",
-    "featureList": "Alfabeto hebraico e aramaico; Alfabeto grego; Analisador interlinear; Transliteradores; Exegese em 7 passos; Funciona offline; Leitura em voz alta; Modo dislexia; Alto contraste; Tema escuro",
+    "featureList": "Alfabeto hebraico e aramaico; Alfabeto grego; Analisador interlinear; Transliteradores; Exegese em 7 passos; Funciona offline; Leitura da página em voz alta (acessibilidade); Modo dislexia; Alto contraste; Tema escuro",
     "teaches": ["Hebraico Bíblico", "Aramaico Bíblico", "Grego Koiné", "Exegese Bíblica"]
   }
   </script>
@@ -1778,6 +1778,7 @@ a.card:hover .card-link::after { transform: translateX(4px); }
       clone.querySelectorAll(
         'button, script, style, svg, .sr-only, [aria-hidden="true"], [hidden], [data-nao-ler], .interlinear, .breadcrumb, table'
       ).forEach((el) => el.remove());
+      clone.querySelectorAll('[lang="he"], [lang="arc"], [lang="grc"], .hebrew, .aramaic, .greek').forEach((el) => el.remove());
       const bruto = clone.textContent || "";
       const texto = bruto.replace(/[ \t\u00A0]+/g, " ").replace(/\n{2,}/g, ". ").replace(/\s*\n\s*/g, ". ").replace(/(\.\s*){2,}/g, ". ").trim();
       if (!texto) return false;
@@ -2336,8 +2337,8 @@ a.card:hover .card-link::after { transform: translateX(4px); }
     {
       t: "Bloco 3 · Imersão",
       min: "20 min",
-      icon: "speaker",
-      d: "Prática direta com o texto bíblico: leitura em voz alta ou análise interlinear nas ferramentas do portal."
+      icon: "scroll",
+      d: "Prática direta com o texto bíblico: leitura atenta do original ou análise interlinear nas ferramentas do portal."
     }
   ];
   var ESTRATEGIAS_IA = [

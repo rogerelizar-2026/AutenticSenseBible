@@ -1,5 +1,5 @@
 /* AutenticSense — Service Worker (gerado por build-sw.py) */
-const VERSION = 'osa-v1186c8fc620e';
+const VERSION = 'osa-v92aa52dc5a61';
 const PRECACHE = [
   "./",
   "./INSTALAR-NO-CELULAR.html",
