@@ -224,6 +224,11 @@ export const tts = {
       '[hidden], [data-nao-ler], .interlinear, .breadcrumb, table'
     ).forEach((el) => el.remove());
 
+    /* Vozes de português não pronunciam escrita hebraica, aramaica ou grega:
+       deixá-las no texto produz silêncio ou ruído no meio da frase. */
+    clone.querySelectorAll('[lang="he"], [lang="arc"], [lang="grc"], .hebrew, .aramaic, .greek')
+      .forEach((el) => el.remove());
+
     /* textContent funciona mesmo em nó solto, fora da árvore renderizada */
     const bruto = clone.textContent || '';
     const texto = bruto

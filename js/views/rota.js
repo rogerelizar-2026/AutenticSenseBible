@@ -47,8 +47,8 @@ const BLOCOS = [
     d: 'Flashcards no Anki (SRS) para manutenção da memória de longo prazo: vocabulário e paradigmas gramaticais.' },
   { t: 'Bloco 2 · Aquisição', min: '20 min', icon: 'book',
     d: 'Novo conteúdo gramatical ou expansão de vocabulário, por lições estruturadas nas obras de referência.' },
-  { t: 'Bloco 3 · Imersão', min: '20 min', icon: 'speaker',
-    d: 'Prática direta com o texto bíblico: leitura em voz alta ou análise interlinear nas ferramentas do portal.' }
+  { t: 'Bloco 3 · Imersão', min: '20 min', icon: 'scroll',
+    d: 'Prática direta com o texto bíblico: leitura atenta do original ou análise interlinear nas ferramentas do portal.' }
 ];
 
 const ESTRATEGIAS_IA = [
